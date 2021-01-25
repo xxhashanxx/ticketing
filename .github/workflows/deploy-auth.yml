@@ -18,3 +18,8 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSOWRD: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker push xxhashanxx/auth
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: 54f581336c394d76222d42ef152de4c46d3ee6c335ca8524e527d287cd7a2322
+      - run: doctl kubernetes cluster kubeconfig save ticketing
+      - run: kubectl rollout restart deployment auth-depl
